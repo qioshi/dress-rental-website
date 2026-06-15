@@ -84,10 +84,7 @@ export function Collection() {
 
             <div className="mt-4 flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                  {dress.designer}
-                </p>
-                <h3 className="mt-1 font-serif text-xl font-medium leading-tight">
+                <h3 className="font-serif text-xl font-medium leading-tight">
                   {dress.name}
                 </h3>
               </div>

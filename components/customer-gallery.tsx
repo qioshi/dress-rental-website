@@ -4,14 +4,36 @@ import Image from "next/image"
 import { Camera } from "lucide-react"
 
 const photos = [
-  { src: "/dresses/dress-1.png", name: "Alyssa M.", occasion: "Wedding Guest" },
-  { src: "/dresses/dress-2.png", name: "Bea R.", occasion: "Debut" },
-  { src: "/dresses/dress-3.png", name: "Carla S.", occasion: "Prom Night" },
-  { src: "/dresses/dress-4.png", name: "Diana L.", occasion: "Birthday Shoot" },
-  { src: "/dresses/dress-5.png", name: "Ella P.", occasion: "Gala Night" },
-  { src: "/dresses/dress-6.png", name: "Fia T.", occasion: "Wedding Guest" },
-  { src: "/dresses/red-longdress.jpeg", name: "Gab & Friends", occasion: "Pictorial" },
-  { src: "/dresses/editorial.png", name: "Hannah C.", occasion: "Debut" },
+  {
+    src: "/dresses/att-special.JPG",
+    name: "Happy Renter",
+    occasion: "Wedding Guest",
+    isCollage: false,
+  },
+  {
+    src: "/dresses/hash-1.JPEG",
+    name: "Nicole",
+    occasion: "Birthday Party",
+    isCollage: false,
+  },
+  {
+    src: "/dresses/hash-2.JPEG",
+    name: "Pink Lace Dress Customers",
+    occasion: "Various Occasions",
+    isCollage: true,
+  },
+  {
+    src: "/dresses/uuid-2.JPG",
+    name: "Red Dress Customers",
+    occasion: "Various Occasions",
+    isCollage: true,
+  },
+  {
+    src: "/dresses/editorial.png",
+    name: "Customers at the Gala",
+    occasion: "Gala Night",
+    isCollage: false,
+  },
 ]
 
 export function CustomerGallery() {
@@ -27,9 +49,7 @@ export function CustomerGallery() {
           </h2>
         </div>
         <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
           className="flex items-center gap-2 text-sm uppercase tracking-widest text-primary underline-offset-4 hover:underline"
         >
           <Camera className="size-4" />
@@ -37,23 +57,23 @@ export function CustomerGallery() {
         </a>
       </div>
 
-      {/* Masonry-style grid */}
-      <div className="mt-10 columns-2 gap-4 sm:columns-3 lg:columns-4">
+      <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3">
         {photos.map((photo, i) => (
           <div
             key={i}
             className="group relative mb-4 break-inside-avoid overflow-hidden rounded-sm bg-secondary"
           >
-            <div className={`relative w-full ${i % 3 === 1 ? "aspect-[3/4]" : "aspect-[4/5]"}`}>
+            <div className={`relative w-full ${photo.isCollage ? "aspect-[3/4]" : "aspect-[4/5]"}`}>
               <Image
                 src={photo.src}
-                alt={`${photo.name} wearing an RNR Closet PH dress for ${photo.occasion}`}
+                alt={`${photo.name} — ${photo.occasion}`}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={`transition-transform duration-500 group-hover:scale-[1.04] ${
+                  photo.isCollage ? "object-contain" : "object-cover object-top"
+                }`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             </div>
-            {/* Hover overlay */}
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-foreground/60 via-transparent to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <p className="font-serif text-base font-medium text-primary-foreground">
                 {photo.name}
@@ -66,7 +86,6 @@ export function CustomerGallery() {
         ))}
       </div>
 
-      {/* CTA */}
       <div className="mt-10 rounded-sm border border-primary/25 bg-primary/5 px-8 py-8 text-center">
         <p className="font-serif text-2xl font-medium">
           Were you a renter? Share your look!
